@@ -16,7 +16,7 @@ def trova_file(nome_file):
 app = QGuiApplication(sys.argv)
 app.setWindowIcon(QIcon(trova_file("./images/icon.ico")))
 
-percorso = trova_file("main.qml")
+percorso = trova_file("./qml/main.qml")
 engine = QQmlApplicationEngine()
 engine.quit.connect(app.quit)
 engine.load(percorso)

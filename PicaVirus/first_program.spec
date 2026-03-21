@@ -6,8 +6,8 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[
-        ('Welcome_page.qml', '.'),
-        ('./images','./images')
+        ('qml', 'qml'),
+        ('images','images')
         ],
     hiddenimports=[],
     hookspath=[],
