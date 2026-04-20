@@ -56,6 +56,7 @@ Background {
         anchors.horizontalCenterOffset:-100
         text: "Ovvio!"
         onClicked: {
+            gestore.playNextSfx()
             gestore.push("Iniziamoo.qml", StackView.Immediate)
         }
     }
@@ -66,6 +67,7 @@ Background {
         anchors.horizontalCenterOffset:100
         text: "No..."
         onClicked: {
+            gestore.playWrongSfx()
             gestore.push("Ricordatii.qml", StackView.Immediate)
         }
     }

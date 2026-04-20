@@ -54,6 +54,7 @@ Background {
         anchors.verticalCenterOffset: 240
         text: "Piffuzzz"
         onClicked: {
+            gestore.playNextSfx()
             gestore.push("Second_page.qml", StackView.Immediate)
         }
     }

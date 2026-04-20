@@ -57,6 +57,7 @@ Background {
         width: 200
         text: "Ora ricordo!!"
         onClicked: {
+            gestore.playCorrectSfx()
             gestore.push("Iniziamoo.qml", StackView.Immediate)
         }
     }

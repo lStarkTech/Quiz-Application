@@ -4,6 +4,14 @@ import QtQuick.Controls.Basic
 Rectangle{
 
     id: picabutton
+    focus: true
+    activeFocusOnTab: true
+
+    // Target opzionali per la navigazione con frecce in keyboardOnlyMode
+    property Item navLeft: null
+    property Item navRight: null
+    property Item navUp: null
+    property Item navDown: null
 
     width: 140
     height: 50
@@ -19,8 +27,8 @@ Rectangle{
 
     antialiasing:true
 
-    //tipo di effetto che vogliamo
-    scale: mouseArea.containsMouse? 1.1 : 1.0
+    // Effetto hover (mouse) + focus (tastiera in keyboardOnlyMode)
+    scale: (mouseArea.containsMouse || (typeof appWindow !== "undefined" && appWindow.keyboardOnlyMode && picabutton.activeFocus)) ? 1.1 : 1.0
 
     //animazione effetto
     Behavior on scale{
@@ -62,4 +70,13 @@ Rectangle{
         hoverEnabled: true
         onClicked: picabutton.clicked()
     }
+
+    Keys.onReturnPressed: picabutton.clicked()
+    Keys.onEnterPressed: picabutton.clicked()
+
+    // Frecce: se i target sono impostati, usali; altrimenti fallback alla navigazione spaziale
+    Keys.onLeftPressed:  if(typeof appWindow !== "undefined" && appWindow.keyboardOnlyMode) { if(navLeft) navLeft.forceActiveFocus()}
+    Keys.onUpPressed:    if(typeof appWindow !== "undefined" && appWindow.keyboardOnlyMode) { if(navUp) navUp.forceActiveFocus()}
+    Keys.onRightPressed: if(typeof appWindow !== "undefined" && appWindow.keyboardOnlyMode) { if(navRight) navRight.forceActiveFocus()}
+    Keys.onDownPressed:  if(typeof appWindow !== "undefined" && appWindow.keyboardOnlyMode) { if(navDown) navDown.forceActiveFocus()}
 }

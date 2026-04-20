@@ -34,6 +34,7 @@ Background{
         anchors.centerIn:parent
         anchors.verticalCenterOffset:120
         onClicked: {
+            gestore.playNextSfx()
             gestore.push("Primo_Ricordo.qml", StackView.Immediate)
         }
     }

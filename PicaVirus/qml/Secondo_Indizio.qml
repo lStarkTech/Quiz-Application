@@ -71,6 +71,7 @@ Background{
         font.pixelSize: 32
         width: 283
         onClicked:{
+            gestore.playNextSfx()
             gestore.push("Secondo_Ricordo.qml", StackView.Immediate)
         }
     }

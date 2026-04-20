@@ -1,8 +1,8 @@
 import sys
 import os
-from PyQt6.QtCore import QObject, pyqtSlot
 from PyQt6.QtGui import QGuiApplication, QIcon
 from PyQt6.QtQml import QQmlApplicationEngine
+from backend import BackEnd
 
 def trova_file(nome_file):
     """
@@ -18,6 +18,8 @@ app.setWindowIcon(QIcon(trova_file("./images/icon.ico")))
 
 percorso = trova_file("./qml/main.qml")
 engine = QQmlApplicationEngine()
+backend = BackEnd()
+engine.rootContext().setContextProperty("backend", backend)
 engine.quit.connect(app.quit)
 engine.load(percorso)
 if not engine.rootObjects():

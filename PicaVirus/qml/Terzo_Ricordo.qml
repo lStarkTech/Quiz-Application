@@ -4,6 +4,9 @@ import"./components"
 
 Background{
 
+    id: root
+    focus: true
+
     Text{
 
         Image{
@@ -75,10 +78,19 @@ Background{
         anchors.horizontalCenterOffset:100
         text: "32"
         font.pixelSize: 32
+
         width: 131
         onClicked:{
+            gestore.playWrongSfx()
             sbagliato.shake()
         }
+
+        // Come gli ImageButton del Secondo_Ricordo:
+        // - left/right: passa all'altro bottone numerico
+        // - down: va al bottone "Dammi un indizio..."
+        navLeft: giusto
+        navRight: giusto
+        navDown: indizioBtn
     }
 
     PicaButton{
@@ -90,8 +102,13 @@ Background{
         font.pixelSize: 32
         width: 131
         onClicked:{
+            gestore.playCorrectSfx()
             gestore.push("Quarto_Ricordo.qml", StackView.Immediate)
         }
+
+        navLeft: sbagliato
+        navRight: sbagliato
+        navDown: indizioBtn
     }
 
 
@@ -100,14 +117,22 @@ Background{
 
 
     PicaButton{
+        id: indizioBtn
         anchors.centerIn: parent
         anchors.verticalCenterOffset: 240
         text: "Dammi un indizio..."
         font.pixelSize: 30
         width: 283
         onClicked:{
+            gestore.playNextSfx()
             gestore.push("Terzo_Indizio.qml", StackView.Immediate)
         }
+
+        // Stessa logica del bottone "Dammi un indizio..." in Secondo_Ricordo:
+        // - up: torna al bottone più a sinistra (qui: "57")
+        // - down: resta su se stesso
+        navUp: giusto
+        navDown: indizioBtn
     }
 
 }

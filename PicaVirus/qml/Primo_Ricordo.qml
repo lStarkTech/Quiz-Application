@@ -3,6 +3,14 @@ import QtQuick.Controls.Basic
 import"./components"
 
 Background{
+    id: root
+
+    readonly property string correctAnswer: "cinema"
+
+    Component.onCompleted: {
+        // Avvia il countdown solo la prima volta, e non lo resetta se vai/torni dagli indizi.
+        gestore.ensureCountdownRunning(30)
+    }
 
     Text{
 
@@ -64,11 +72,15 @@ Background{
 
         onAccepted:{
             let rispostaUtente = textfield.text.trim()
-            if(rispostaUtente.toLowerCase() === "cinema"){
+            let ok = backend.submit_answer(rispostaUtente, root.correctAnswer)
+            if(ok){
+                gestore.stopCountdown()
+                gestore.playCorrectSfx()
                 gestore.push("Secondo_Ricordo.qml", StackView.Immediate)
             }
             else{
-                textfield-shake()
+                gestore.playWrongSfx()
+                textfield.shake()
                 textfield.clear()
                 textfield.placeholderText = "Sbagliato :(("
             }
@@ -101,6 +113,7 @@ Background{
         font.pixelSize: 30
         width: 283
         onClicked:{
+            gestore.playNextSfx()
             gestore.push("Primo_indizio.qml", StackView.Immediate)
         }
     }
