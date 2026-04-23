@@ -1,3 +1,6 @@
 ../Prova_PyQt6/
 ../YouLoader/
 .venv/
+../build/
+../dist/
+../__pycache__/
