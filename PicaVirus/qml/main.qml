@@ -19,7 +19,7 @@ ApplicationWindow{
     MediaPlayer{
         id: bgPlayer
         audioOutput: bgAudioOut
-        source: "../music/background.mp3"
+        source: musicPath
         loops: MediaPlayer.Infinite
     }
 

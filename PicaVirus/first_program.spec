@@ -1,5 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
-
+import PyInstaller.config
+PyInstaller.config.CONF['render_items'] = True
 
 a = Analysis(
     ['first_program.py'],
@@ -7,9 +8,10 @@ a = Analysis(
     binaries=[],
     datas=[
         ('qml', 'qml'),
-        ('images','images')
+        ('images','images'),
+        ('music','music')
         ],
-    hiddenimports=[],
+    hiddenimports=['PyQt6.QtMultimedia', 'PyQt6.QtMultimediaWidgets'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

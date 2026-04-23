@@ -2,6 +2,7 @@ import sys
 import os
 from PyQt6.QtGui import QGuiApplication, QIcon
 from PyQt6.QtQml import QQmlApplicationEngine
+from PyQt6.QtCore import QUrl
 from backend import BackEnd
 
 def trova_file(nome_file):
@@ -15,11 +16,13 @@ def trova_file(nome_file):
 
 app = QGuiApplication(sys.argv)
 app.setWindowIcon(QIcon(trova_file("./images/icon.ico")))
+dir_music = trova_file("./music/background.wav")
 
 percorso = trova_file("./qml/main.qml")
 engine = QQmlApplicationEngine()
 backend = BackEnd()
 engine.rootContext().setContextProperty("backend", backend)
+engine.rootContext().setContextProperty("musicPath", QUrl.fromLocalFile(dir_music).toString())
 engine.quit.connect(app.quit)
 engine.load(percorso)
 if not engine.rootObjects():
